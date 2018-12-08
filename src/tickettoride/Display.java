@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.event.ActionEvent;
 import javafx.scene.shape.Circle;
+import tickettoride.Options;
 
 
 
@@ -371,9 +372,18 @@ public class Display extends Application{
         ready.setTranslateY(270);
         
         //Create End game button
-        Button endGame = new Button("End Game");
-        endGame.setTranslateX(1199);
-        endGame.setTranslateY(0);
+        Button endGame = new Button("End Game");  //MR
+        endGame.setTranslateX(0);              //MR
+        endGame.setTranslateY(0);                 //MR
+        
+        
+        Button pauseScreen = new Button("Options");
+        pauseScreen.setTranslateX(1199);
+        pauseScreen.setTranslateY(0);
+        
+        Button resumeGame = new Button("Resume Game");
+        resumeGame.setTranslateX(50);
+        resumeGame.setTranslateY(50);
         
 //</editor-fold>
       
@@ -1195,7 +1205,7 @@ public class Display extends Application{
                 ELP, STF, MON, BIS,
                 
                 //end Game button
-                endGame,
+                pauseScreen,
 
                 
                 // route length labels 
@@ -1219,6 +1229,8 @@ public class Display extends Application{
 //                c3, c4, c5, c6, c7, c8, c9, c10, c11, r1, r2, r3, r4, r5, 
 //                r6, r7);
 //                
+
+        
         //DEFINE SCENE Transition
         Pane root3 = new Pane();
         Scene transition = new Scene(root3,1280,720);
@@ -1237,13 +1249,31 @@ p2.setOnAction(e -> {
     
 });
 
-endGame.setOnAction(e -> {
+resumeGame.setOnAction(e -> { //MR
+    //opts.close();
+});
+
+endGame.setOnAction(e -> {  //MR
+/*
     Player p = game.calcWinner();
     int score1 =game.getPlayers().get(0).GetScore();
     int score2 =game.getPlayers().get(1).GetScore();
     
-    EndGame.endGame(score1, score2, p);
+    //EndGame.endGame(score1, score2, p);
+    */
+    primaryStage.close();
     
+});
+
+pauseScreen.setOnAction(e -> {  //MR
+ 
+    boolean tx = true;
+    Player p = game.calcWinner();
+    int score1 =game.getPlayers().get(0).GetScore();
+    int score2 =game.getPlayers().get(1).GetScore();
+    
+    Options ops = new Options();
+    ops.opts(score1,score2,p);
     primaryStage.close();
 });
 
